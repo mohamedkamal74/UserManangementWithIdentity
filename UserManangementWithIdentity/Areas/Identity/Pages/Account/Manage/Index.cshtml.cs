@@ -32,10 +32,21 @@ namespace UserManangementWithIdentity.Areas.Identity.Pages.Account.Manage
         public InputModel Input { get; set; }
 
         public class InputModel
-        {
+        {  
+            [Required]
+            [Display(Name ="First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Profile Picture")]
+            public byte[] ProfilePicture { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
@@ -47,6 +58,8 @@ namespace UserManangementWithIdentity.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FirstName=user.FirstName,
+                LastName=user.LastName,
                 PhoneNumber = phoneNumber
             };
         }
@@ -78,6 +91,20 @@ namespace UserManangementWithIdentity.Areas.Identity.Pages.Account.Manage
             }
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var firstname = user.FirstName;
+            var lastname = user.LastName;
+
+            if(Input.FirstName != firstname)
+            {
+                user.FirstName=Input.FirstName;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Input.LastName != lastname)
+            {
+                user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            } 
+
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
