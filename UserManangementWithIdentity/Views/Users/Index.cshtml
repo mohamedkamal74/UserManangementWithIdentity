@@ -3,10 +3,10 @@
     ViewData["Title"] = "Users";
 }
 
-<h1 class="text-info"> Users</h1>
-<table class="table table-bordered table-striped hover mt-4">
-    <thead class="bg-info text-white ">
-        <tr>
+<h1 class="text-info">List Of Users</h1>
+<table class="table table-bordered table-striped table-hover mt-4">
+    <thead>
+        <tr  class="bg-info text-white ">
         <th>First Name</th>
         <th>Last Name</th>
         <th>user Name</th>
@@ -24,8 +24,10 @@
                 <td>@User.LastName</td>
                 <td>@User.UserName</td>
                 <td>@User.Email</td>
-                <td>@User.FirstNmae</td>
-                <td></td>
+                <td> @string.Join(" , ",  @User.Roles.ToList())</td>
+                <td>
+                    <a asp-action="ManageRoles" asp-controller="Users" class="btn btn-outline-info" asp-route-id="@User.Id">Manage Roles</a>
+                </td>
             </tr>
         }
     </tbody>
