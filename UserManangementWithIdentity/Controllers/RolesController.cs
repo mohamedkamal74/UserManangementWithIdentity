@@ -26,9 +26,9 @@ namespace UserManangementWithIdentity.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Index",await _roleManager.Roles.ToListAsync());
+                return View("Index", await _roleManager.Roles.ToListAsync());
             }
-            if(await _roleManager.RoleExistsAsync(model.Name))
+            if (await _roleManager.RoleExistsAsync(model.Name))
             {
                 ModelState.AddModelError("Name", "This Role Is Already Exist");
                 return View("Index", await _roleManager.Roles.ToListAsync());
@@ -38,5 +38,7 @@ namespace UserManangementWithIdentity.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+
     }
 }

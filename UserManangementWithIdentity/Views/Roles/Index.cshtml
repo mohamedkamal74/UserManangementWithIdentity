@@ -4,11 +4,13 @@
 }
 
 <h1 class="text-info">Roles</h1>
+<partial name="_RoleForm" model="new RoleFormViewModel()" />
+
 <table class="table table-bordered table-striped table-hover mt-3">
     <thead class="bg-info text-white">
         <tr>
-         <th>Id</th>     
-         <th>Name</th>     
+            <th>Id</th>
+            <th>Name</th>
         </tr>
     </thead>
     <tbody>
@@ -21,4 +23,8 @@
         }
     </tbody>
 </table>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}
 
