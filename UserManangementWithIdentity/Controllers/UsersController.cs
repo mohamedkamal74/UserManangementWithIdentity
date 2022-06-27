@@ -119,16 +119,16 @@ namespace UserManangementWithIdentity.Controllers
             var user= await _userManager.FindByIdAsync(model.Id);
             if (user == null)
                 return NotFound();
-            var userwithsameemail=await _userManager.FindByEmailAsync(user.Email);
+            var userwithsameemail=await _userManager.FindByEmailAsync(model.Email);
             if(userwithsameemail != null&&userwithsameemail.Id != model.Id)
             {
-                ModelState.AddModelError("Email", "Email is Already Exist with another user");
+                ModelState.AddModelError("Email", "Email is Already Assign to another user");
                 return View(model);
             }
-            var userwithsameusername = await _userManager.FindByNameAsync(user.UserName);
+            var userwithsameusername = await _userManager.FindByNameAsync(model.UserName);
             if (userwithsameusername != null && userwithsameusername.Id != model.Id)
             {
-                ModelState.AddModelError("UserName", "UserName is Already Exist with another user");
+                ModelState.AddModelError("UserName", "UserName is Already Assign to another user");
                 return View(model);
             }
             user.FirstName = model.FirstName;
