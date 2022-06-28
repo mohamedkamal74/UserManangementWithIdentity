@@ -38,47 +38,46 @@
 
 @section scripts{
 <script>
-    const { error } = require("jquery");
 
-                $(document).ready(function(){
-                    $('.js-delete').on("click",function(){
-                    var btn=$(this);
-                    bootbox.confirm({
-            message: "Are you sure you want to delete this user ?",
-            buttons: {
-                confirm: {
-                    label: 'Yes',
-                    className: 'btn-danger'
-                },
-                cancel: {
-                    label: 'No',
-                    className: 'btn-dark'
-                }
+            $(document).ready(function(){
+                $('.js-delete').on("click",function(){
+                var btn=$(this);
+                bootbox.confirm({
+        message: "Are you sure you want to delete this user ?",
+        buttons: {
+            confirm: {
+                label: 'Yes',
+                className: 'btn-danger'
             },
-            callback: function (result) {
-                if(result){
-                    $.ajax({
-                        url:'/api/users/?id=' + btn.data('id'),
-                        method:'DELETE',
-                        success:function(){
-                            btn.parent('tr').fadeOut();
-                            alert("User is deleted");
-                        },
-                        error:function(){
-                            alert("Something Wrong");
-                        }
-
-
-                    });
-                }
+            cancel: {
+                label: 'No',
+                className: 'btn-dark'
             }
-        });
+        },
+        callback: function (result) {
+            if(result){
+                $.ajax({
+                    url:'/api/users/?id=' + btn.data('id'),
+                    method:'DELETE',
+                    success:function(){
+                        btn.parents('tr').fadeOut();
+                        alert("User is deleted");
+                    },
+                    error:function(){
+                        alert("Something Wrong");
+                    }
 
-
-
-                    });
 
                 });
+            }
+        }
+    });
+
+
+
+                });
+
+            });
 
 </script>
 }
